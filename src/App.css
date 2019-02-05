@@ -1,4 +1,23 @@
 .App {
   text-align: center;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SevenMin{
+  width: 25rem;
+  height: 25rem;
+  border: 1px dotted black;
+}
+
+.Exercise{
+  border-bottom: 5px solid black;
+  font-size: 5rem;
+}
+
+.Timer{
+  font-size: 4rem;
+
 }
 
