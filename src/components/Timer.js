@@ -5,6 +5,10 @@ const Timer = props => {
   return(
     <div className="Timer">
       {time}
+      <div className="controls">
+        <button id="play" name="play">Play</button>
+        <button id="stop" name="stop">Stop</button>
+      </div>
     </div>
   )
 }
