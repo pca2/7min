@@ -26,6 +26,7 @@ class SevenMin extends React.Component{
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.tick = this.tick.bind(this);
+    this.resetProgram = this.resetProgram.bind(this);
   };
   
   toggleTimer(){
@@ -45,6 +46,14 @@ class SevenMin extends React.Component{
     clearInterval(this.timerID);
     this.toggleTimer();
   }
+  resetProgram(){
+    this.stopTimer();
+    this.setState({
+      time: timerLength,
+      activity: exerciseList[0]
+    })
+
+  }
   
   tick(){
     if(this.state.time <= 1){
@@ -54,12 +63,19 @@ class SevenMin extends React.Component{
       time: prevState.time - 1
     }))
   }
+
   
   render(){
+    var handleClick;
+    if(this.state.timerRunning){
+      handleClick = this.stopTimer
+    } else {
+      handleClick = this.startTimer
+    }
     return(
       <div className="SevenMin">
         <Exercise name={this.state.activity} />
-        <Timer time={this.state.time} startTimer={this.startTimer} stopTimer={this.stopTimer}  />
+        <Timer time={this.state.time} handleClick={handleClick}/>
       </div>
     )
   }
