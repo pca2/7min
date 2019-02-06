@@ -67,18 +67,20 @@ class SevenMin extends React.Component{
     }))
   }
 
+
   
   render(){
-    var handleClick;
+    let controls;
     if(this.state.timerRunning){
-      handleClick = this.stopTimer
+      controls = <Button handleClick={this.stopTimer} text="Stop"/> 
     } else {
-      handleClick = this.startTimer
+      controls =  <Button handleClick={this.startTimer} text="Start"/>
     }
     return(
       <div className="SevenMin">
         <Exercise name={this.state.activity} />
-        <Timer time={this.state.time} handleClick={handleClick}/>
+        <Timer time={this.state.time}/>
+        {controls}
       </div>
     )
   }
