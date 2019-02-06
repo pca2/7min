@@ -1,6 +1,9 @@
 import React from 'react';
 import Exercise from './Exercise';
 import Timer from './Timer';
+import Controls from './Controls';
+import Button from './Button';
+
 const exerciseList = [
   'Center Shoulders',
   'Front Shoulders',
