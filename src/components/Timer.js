@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Timer = props => {
-  const {time} = props;
+  const {timerPosition} = props;
   return(
     <div className="Timer">
-      {time}
+      {timerPosition}
     </div>
   )
 }

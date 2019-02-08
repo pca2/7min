@@ -1,7 +1,6 @@
 import React from 'react';
 import Exercise from './Exercise';
 import Timer from './Timer';
-import Controls from './Controls';
 import Button from './Button';
 
 const exerciseList = [
@@ -14,22 +13,25 @@ const exerciseList = [
   'Pushups',
   'Sit-ups'
 ];
-const timerLength = 30;
+const defaultTimerLength = 35;
 
 
 class SevenMin extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      time: timerLength,
-      activity: exerciseList[0],
-      timerRunning: false
+      timerPosition: defaultTimerLength,
+      displayText: exerciseList[0],
+      position: 0,
+      timerRunning: false,
+      isBreak: false
     }
     this.toggleTimer = this.toggleTimer.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.tick = this.tick.bind(this);
     this.resetProgram = this.resetProgram.bind(this);
+    this.takeBreak = this.takeBreak.bind(this);
   };
   
   toggleTimer(){
@@ -52,34 +54,67 @@ class SevenMin extends React.Component{
   resetProgram(){
     this.stopTimer();
     this.setState({
-      time: timerLength,
-      activity: exerciseList[0]
+      timerPosition: defaultTimerLength,
+      displayText: exerciseList[0],
+      isBreak: false
     })
 
   }
+
+  takeBreak(){
+    this.setState({
+      displayText: 'Break',
+      timerPosition: 10,
+      isBreak: true
+    })
+  }
   
   tick(){
-    if(this.state.time <= 1){
-      this.stopTimer();
-    };
     this.setState((prevState) => ({
-      time: prevState.time - 1
-    }))
+      timerPosition: prevState.timerPosition - 1
+    }));
+    
+    const {timerPosition, displayText, position, isBreak} = this.state;
+
+    if(timerPosition < 0){
+      console.log("timerPosition has gotten down to zero")
+      var nextExercise = exerciseList[position + 1]
+      console.log(`nextExercise is ${nextExercise} and current exercise is ${displayText}`)
+      if(!nextExercise){
+        console.log("next excercise is falsy so I'm resetting program")
+        this.resetProgram();
+        return; 
+      }
+      if(isBreak){
+        console.log(`Break was last run so I'm running next exercise, which is ${nextExercise} `)
+        this.setState(prevState => ({
+          timerPosition: defaultTimerLength, 
+          displayText: nextExercise, 
+          isBreak: false,
+          position: prevState.position + 1
+        }))
+      } else {
+        console.log(`${displayText} was just run some I'm takin' a break`)
+        this.takeBreak()
+      }
+    };
   }
+
 
 
   
   render(){
+    const {timerRunning, displayText, timerPosition} = this.state;
     let controls;
-    if(this.state.timerRunning){
+    if(timerRunning){
       controls = <Button handleClick={this.stopTimer} text="Stop"/> 
     } else {
       controls =  <Button handleClick={this.startTimer} text="Start"/>
     }
     return(
       <div className="SevenMin">
-        <Exercise name={this.state.activity} />
-        <Timer time={this.state.time}/>
+        <Exercise name={displayText} />
+        <Timer timerPosition={timerPosition}/>
         {controls}
       </div>
     )
