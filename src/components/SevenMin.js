@@ -2,6 +2,7 @@ import React from 'react';
 import Exercise from './Exercise';
 import Timer from './Timer';
 import Button from './Button';
+import ListDisplay from './ListDisplay';
 
 const exerciseList = [
   'Center Shoulders',
@@ -116,6 +117,7 @@ class SevenMin extends React.Component{
         <Exercise name={displayText} />
         <Timer timerPosition={timerPosition}/>
         {controls}
+        <ListDisplay list={exerciseList} />
       </div>
     )
   }
