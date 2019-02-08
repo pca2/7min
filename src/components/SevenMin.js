@@ -14,7 +14,7 @@ const exerciseList = [
   'Pushups',
   'Sit-ups'
 ];
-const defaultTimerLength = 35;
+const defaultTimerLength = 30;
 
 
 class SevenMin extends React.Component{
@@ -65,7 +65,7 @@ class SevenMin extends React.Component{
   takeBreak(){
     this.setState({
       displayText: 'Break',
-      timerPosition: 10,
+      timerPosition: 5,
       isBreak: true
     })
   }
