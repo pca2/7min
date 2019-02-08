@@ -18,6 +18,9 @@
 
 .Timer{
   font-size: 4rem;
-
+}
+.ListDisplay{
+  border: 2px solid black;
+  float:left;
 }
 
