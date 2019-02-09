@@ -1,14 +1,25 @@
 .App {
   text-align: center;
-  display:flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .SevenMin{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+.ListDisplay{
+  text-align: left;
+  border: 2px solid green;
+  float: left;
+  font-size: 2rem;
+  padding-right: 3rem; 
+}
+.exerciseTimer{
+  margin: 0 auto;
   width: 25rem;
   height: 25rem;
-  border: 1px dotted black;
+  border: 3px dotted black;
 }
 
 .Exercise{
@@ -18,9 +29,5 @@
 
 .Timer{
   font-size: 4rem;
-}
-.ListDisplay{
-  border: 2px solid black;
-  float:left;
 }
 
