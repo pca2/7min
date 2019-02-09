@@ -114,10 +114,12 @@ class SevenMin extends React.Component{
     }
     return(
       <div className="SevenMin">
-        <Exercise name={displayText} />
-        <Timer timerPosition={timerPosition}/>
-        {controls}
         <ListDisplay list={exerciseList} />
+        <div className="exerciseTimer">
+          <Exercise name={displayText} />
+          <Timer timerPosition={timerPosition}/>
+          {controls}
+        </div>
       </div>
     )
   }
