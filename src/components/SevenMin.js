@@ -57,7 +57,8 @@ class SevenMin extends React.Component{
     this.setState({
       timerPosition: defaultTimerLength,
       displayText: exerciseList[0],
-      isBreak: false
+      isBreak: false,
+      position: 0
     })
 
   }
