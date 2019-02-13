@@ -2,11 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const ListItem = props => (
-  <div className="ListItem">
-    <li>{props.item}</li>
-   </div>
-);
+const ListItem = props => {
+  let className="ListItem";
+  if(props.listPosition === props.currentPosition){
+    className += " list-item-active"
+  }
+  
+  return(
+    <div className={className}>
+      <li>{props.item}</li>
+     </div>
+  );
+}
 
 ListItem.propTypes = {
   item: PropTypes.string.isRequired

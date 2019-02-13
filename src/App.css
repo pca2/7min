@@ -31,3 +31,6 @@
   font-size: 4rem;
 }
 
+.list-item-active{
+  font-weight: 800;
+}

@@ -106,7 +106,7 @@ class SevenMin extends React.Component{
 
   
   render(){
-    const {timerRunning, displayText, timerPosition} = this.state;
+    const {timerRunning, displayText, timerPosition, position} = this.state;
     let controls;
     if(timerRunning){
       controls = <Button handleClick={this.stopTimer} text="Stop"/> 
@@ -115,7 +115,7 @@ class SevenMin extends React.Component{
     }
     return(
       <div className="SevenMin">
-        <ListDisplay list={exerciseList} />
+        <ListDisplay list={exerciseList} currentPosition={position} />
         <div className="exerciseTimer">
           <Exercise name={displayText} />
           <Timer timerPosition={timerPosition}/>
