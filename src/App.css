@@ -34,3 +34,10 @@
 .list-item-active{
   font-weight: 800;
 }
+
+
+button{
+  width:200px;
+  height:100px;
+  font-size: 40px;
+}
