@@ -29,7 +29,7 @@ class SevenMin extends React.Component{
       position: 0,
       timerRunning: false,
       isBreak: false,
-      soundFile: null
+      soundFile: tickSound
     }
     this.toggleTimer = this.toggleTimer.bind(this);
     this.startTimer = this.startTimer.bind(this);
@@ -77,8 +77,7 @@ class SevenMin extends React.Component{
   
   tick(){
     this.setState((prevState) => ({
-      timerPosition: prevState.timerPosition - 1,
-      soundFile: tickSound
+      timerPosition: prevState.timerPosition - 1
     }));
     const {timerPosition, displayText, position, isBreak} = this.state;
 
@@ -94,13 +93,13 @@ class SevenMin extends React.Component{
         return; 
       }
       if(isBreak){
-        this.setState({soundFile: null});
         console.log(`Break was last run so I'm running next exercise, which is ${nextExercise} `)
         this.setState(prevState => ({
           timerPosition: defaultTimerLength, 
           displayText: nextExercise, 
           isBreak: false,
-          position: prevState.position + 1
+          position: prevState.position + 1,
+          soundFile: tickSound
         }))
       } else {
         console.log(`${displayText} was just run some I'm takin' a break`)
@@ -113,17 +112,19 @@ class SevenMin extends React.Component{
 
   
   render(){
-    const {timerRunning, displayText, timerPosition, position} = this.state;
+    const {timerRunning, displayText, timerPosition, position, isBreak} = this.state;
     let controls;
-    let soundEffect;
+    let soundStatus;
     if(timerRunning){
       controls = <Button handleClick={this.stopTimer} text="Stop"/> 
-      soundEffect = <Sound 
-       url={this.state.soundFile}
-       playStatus={Sound.status.PLAYING}  
-      />
+        if(!isBreak){
+          soundStatus = Sound.status.PLAYING  
+        }else{
+          soundStatus = Sound.status.STOPPED  
+        }
     } else {
       controls =  <Button handleClick={this.startTimer} text="Start"/>
+      soundStatus = Sound.status.STOPPED  
     }
     return(
       <div className="SevenMin">
@@ -132,7 +133,7 @@ class SevenMin extends React.Component{
           <Exercise name={displayText} />
           <Timer timerPosition={timerPosition}/>
           {controls}
-          {soundEffect}
+          <Sound url={this.state.soundFile} playStatus={soundStatus} autoLoad={true} />
         </div>
       </div>
     )
